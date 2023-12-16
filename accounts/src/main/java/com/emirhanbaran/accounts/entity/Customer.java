@@ -1,10 +1,7 @@
 package com.emirhanbaran.accounts.entity;
 
-import com.emirhanbaran.accounts.entity.BaseClass;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -20,16 +17,15 @@ public class Customer extends BaseClass {
     private Long customerId;
 
     @Size(max = 100)
-    @NotNull
+    @NotEmpty(message = "Name cannot be empty or null")
     private String name;
 
     @Email
     @Size(max = 100)
-    @NotNull
+    @NotEmpty(message = "Email Cannot be Null or Empty")
     private String email;
 
-    @NotNull
-    @Size(max = 20)
+    @NotEmpty(message = "Phone Number cannot be null or Empty")
     private String mobileNumber;
 
 

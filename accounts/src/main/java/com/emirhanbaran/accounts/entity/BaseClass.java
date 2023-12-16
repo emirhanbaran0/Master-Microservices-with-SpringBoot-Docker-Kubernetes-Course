@@ -1,12 +1,23 @@
 package com.emirhanbaran.accounts.entity;
 
+import com.emirhanbaran.accounts.audit.AuditAwareImpl;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -14,23 +25,26 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 public class BaseClass {
 
-    @NotNull
+
     @Column(name = "created_at",updatable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
-    @NotNull
+
     @Column(name = "created_by",updatable = false)
-    private LocalDateTime createdBy;
+    @CreatedBy
+    private String createdBy;
 
     //When the object created  for FIRST TIME updatedAt and updatedBy columns will be null
     //because insertable=false
-    @NotNull
-    @Size(max = 20)
+
     @Column(name = "updated_at",insertable = false)
+    @LastModifiedDate
     private LocalDateTime updatedAt;
-    @NotNull
-    @Column(name = "updated_by",insertable = false)
-    @Size(max = 20)
-    private LocalDateTime updatedBy;
+
+    @LastModifiedBy
+    @Column(name = "updated_by")
+    private String updatedBy;
 }
