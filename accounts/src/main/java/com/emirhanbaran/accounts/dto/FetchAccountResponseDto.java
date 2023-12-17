@@ -1,8 +1,13 @@
 package com.emirhanbaran.accounts.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(
+        name = "Customer & Account Infos",
+        description = "Schema to hold Customer detailed(with Account) information"
+)
 public class FetchAccountResponseDto {
 
     private String name;
