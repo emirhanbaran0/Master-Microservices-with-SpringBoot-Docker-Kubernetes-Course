@@ -1,0 +1,16 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/microservice_db
+    username: root
+    password: 1S22s22p63s2
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+      format_sql: true
